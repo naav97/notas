@@ -15,7 +15,7 @@ public class Ui {
 		boolean fin=false;
 		while(!fin)
 		{
-
+			printMenuPrincipal();
 			//opcion req
 			int option = sc.nextInt();
 
@@ -23,26 +23,20 @@ public class Ui {
 			{
 			//1C cargar informacion dada
 			case 1:
+				System.out.println("Escriba el nombre de la clse: ");
 				String nombre = sc.next();
-				//Controller.Controller.adiccionarSuperMercado(nombre);
+				Clase c = new Clase(nombre);
+				calc.addClase(c);
 				break;
 			case 2:
-				System.out.println("Escriva el tipo de producto (Peresedero, NoPeresedero o Abarrote)");
-				String tipo = sc.next();
-				if(tipo == "Peresedero") {
-					
-				}
-				else if(tipo == "NoPeresedero") {
-					
-				}
-				else if(tipo == "Abarrote") {
-					
-				}
-				else {
-					System.out.println("El tipo de producto "+tipo+" no existe.");
-				}
+				System.out.println("Escoja una clase: ");
+				printMenuClases(calc.getClases());
+				int i = sc.nextInt();
+				calc.removeClase(i);
 				break;
 			case 3:
+				System.out.println("Escoja una clase: ");
+				printMenuClases(calc.getClases());
 				break;
 			case 4:
 				System.out.println("Ingrese el nombre");
@@ -56,8 +50,10 @@ public class Ui {
 		System.out.println("-----------------------NAAV97-------------------------");
 		System.out.println("-----------------Calculador de notas------------------");
 		System.out.println("Menu Principal: ");
-		System.out.println("1. Cargar");
-		System.out.println("2. Persistir");
+		System.out.println("1. Agregar Clase");
+		System.out.println("2. Eliminar Clase");
+		System.out.println("3. Seleccionar Clase");
+		System.out.println("4. Guardar");
 	}
 
 	private static void printMenuClases(ArrayList<Clase> cs)
@@ -68,6 +64,11 @@ public class Ui {
 		for(int i = 0; i < cs.size(); i++) {
 			System.out.println(i+". "+cs.get(i).getNombre());
 		}
+	}
+	
+	private static void printMenuClase(Clase c) {
+		System.out.println("-----------------------NAAV97-------------------------");
+		System.out.println("-----------------Calculador de notas------------------");
 	}
 
 }
