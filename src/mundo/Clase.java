@@ -36,6 +36,10 @@ public class Clase {
 		notas.remove(n);
 	}
 	
+	public void removeNota(int n) {
+		notas.remove(n);
+	}
+	
 	public double getDefinitiva() {
 		double re = 0;
 		for(Nota n : notas) {
