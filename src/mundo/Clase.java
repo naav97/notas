@@ -1,6 +1,7 @@
 package mundo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Clase {
 	
@@ -53,7 +54,7 @@ public class Clase {
 		for(Nota n : ns) {
 			def = def + n.getNota();
 		}
-		if(def < num) {
+		if(def < num * 100) {
 			return false;
 		}
 		else {
@@ -73,10 +74,7 @@ public class Clase {
 	}
 	
 	public ArrayList<Nota> notasQueTocaSacar(double num){
-		ArrayList<Nota> re = new ArrayList<>();
-		for(Nota n : notas) {
-			re.add(n);
-		}
+		ArrayList<Nota> re = new ArrayList<>(notas);
 		boolean ya = false;
 		boolean Noobtenidas = checkNoObtenidaExiste(re);
 		if(Noobtenidas) {

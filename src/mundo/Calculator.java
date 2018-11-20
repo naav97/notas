@@ -98,5 +98,11 @@ public class Calculator {
 			this.clases.add(c);
 		}
 	}
+	
+	public void reload() throws Exception {
+		clases = null;
+		clases = new ArrayList<>();
+		load();
+	}
 
 }

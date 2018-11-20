@@ -110,6 +110,7 @@ public class Ui {
 						double def = sc.nextDouble();
 						ArrayList<Nota> notasNes = c3.notasQueTocaSacar(def);
 						printMenuNotas(notasNes);
+						calc.reload();
 						break;
 					case 7:
 						fin3 = true;
