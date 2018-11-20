@@ -61,14 +61,6 @@ public class Clase {
 		}
 	}
 	
-	private void aumentarUna(ArrayList<Nota> ns) {
-		for(Nota n : ns) {
-			if(!n.isObtenida()) {
-				n.setPuntos(n.getPuntos() + 0.1);
-			}
-		}
-	}
-	
 	private boolean checkNoObtenidaExiste(ArrayList<Nota> ns) {
 		boolean re = false;
 		for(Nota n : ns) {
@@ -86,15 +78,21 @@ public class Clase {
 			re.add(n);
 		}
 		boolean ya = false;
-		while(!ya) {
-			if(checkPaso(re,num)) {
-				ya = true;
-			}
-			if(checkNoObtenidaExiste(re)) {
-				aumentarUna(re);
-			}
-			else {
-				ya = true;
+		boolean Noobtenidas = checkNoObtenidaExiste(re);
+		if(Noobtenidas) {
+			while(!ya) {
+				if(checkPaso(re,num)) {
+					ya = true;
+				}
+				for(Nota n : re) {
+					if(!n.isObtenida()) {
+						n.setPuntos(n.getPuntos() + 0.1);
+					}
+					if(checkPaso(re,num)) {
+						ya = true;
+						break;
+					}
+				}
 			}
 		}
 		return re;

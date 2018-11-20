@@ -9,7 +9,7 @@ public class Ui {
 	
 	private static Calculator calc;
 	
-	public static void main(String[] args) 
+	public static void main(String[] args) throws Exception 
 	{
 		calc = new Calculator();
 		Scanner sc = new Scanner(System.in);
@@ -36,12 +36,16 @@ public class Ui {
 				calc.removeClase(i);
 				break;
 			case 3:
+				if(calc.getClases().size() == 0) {
+					System.out.println("No hay clases");
+					break;
+				}
 				System.out.println("Escoja una clase: ");
 				printMenuClases(calc.getClases());
 				int clas = sc.nextInt();
 				Clase c3 = calc.getClases().get(clas);
 				boolean fin3 = false;
-				while(!fin) {
+				while(!fin3) {
 					printMenuClase(c3);
 					int opt3 = sc.nextInt();
 					switch(opt3) {
@@ -65,25 +69,62 @@ public class Ui {
 						c3.removeNota(inot33);
 						break;
 					case 4:
-						
+						System.out.println("Escoja una nota: ");
+						printMenuNotas(c3.getNotas());
+						int nota34 = sc.nextInt();
+						Nota n34 = c3.getNotas().get(nota34);
+						boolean fin34 = false;
+						while(!fin34) {
+							printMenuNota(n34);
+							int opt34  = sc.nextInt();
+							switch(opt34) {
+							case 1:
+								System.out.println("Escriba el nuevo nombre de la nota: ");
+								String nombre34 = sc.next();
+								n34.setNombre(nombre34);
+								break;
+							case 2:
+								System.out.println("Escriba el nuevo porcentage de la nota: ");
+								double porc34 = sc.nextDouble();
+								n34.setPorcentage(porc34);
+								break;
+							case 3:
+								System.out.println("Escriba el nuevo puntaje de la nota: ");
+								double punt34 =  sc.nextDouble();
+								n34.setPuntos(punt34);
+								break;
+							case 4:
+								n34.setObtenida(!n34.isObtenida());
+								break;
+							case 5:
+								fin34 = true;
+								break;
+							}
+						}
 						break;
 					case 5:
-						
+						printMenuNotas(c3.getNotas());
 						break;
 					case 6:
-						
+						System.out.println("Escriba cuanto quiere sacar en la nota final: ");
+						double def = sc.nextDouble();
+						ArrayList<Nota> notasNes = c3.notasQueTocaSacar(def);
+						printMenuNotas(notasNes);
 						break;
 					case 7:
-						
+						fin3 = true;
 						break;
 					}
 				}
 				break;
 			case 4:
-				
+				calc.save();
 				break;
 			case 5:
-				
+				calc.load();
+				break;
+			case 6:
+				fin = true;
 				break;
 			}
      	}
@@ -97,7 +138,8 @@ public class Ui {
 		System.out.println("2. Eliminar Clase");
 		System.out.println("3. Seleccionar Clase");
 		System.out.println("4. Guardar");
-		System.out.println("5. Salir");
+		System.out.println("5. Cargar");
+		System.out.println("6. Salir");
 	}
 
 	private static void printMenuClases(ArrayList<Clase> cs)
@@ -131,6 +173,17 @@ public class Ui {
 			Nota nia = ns.get(i);
 			System.out.println(i+". "+nia.getNombre()+" "+nia.getPorcentage()+" "+nia.getPuntos()+" "+nia.isObtenida());
 		}
+	}
+	
+	private static void printMenuNota(Nota n) {
+		System.out.println("-----------------------NAAV97-------------------------");
+		System.out.println("-----------------Calculador de notas------------------");
+		System.out.println(n.getNombre());
+		System.out.println("1. Cambiar nombre");
+		System.out.println("2. Cambiar porcentage");
+		System.out.println("3. Cambiar puntos");
+		System.out.println("4. Cambiar obtenida");
+		System.out.println("5. Salir");
 	}
 
 }
