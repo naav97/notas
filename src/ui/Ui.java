@@ -14,11 +14,19 @@ public class Ui {
 		calc = new Calculator();
 		Scanner sc = new Scanner(System.in);
 		boolean fin=false;
+		calc.load();
 		while(!fin)
 		{
 			printMenuPrincipal();
 			//opcion req
-			int option = sc.nextInt();
+			String opt = sc.next();
+			int option = 0;
+			if(opt.equals("Q")) {
+				fin = true;
+			}
+			else {
+				option = Integer.parseInt(opt);
+			}
 
 			switch(option)
 			{
@@ -47,7 +55,14 @@ public class Ui {
 				boolean fin3 = false;
 				while(!fin3) {
 					printMenuClase(c3);
-					int opt3 = sc.nextInt();
+					String opt3S = sc.next();
+					int opt3 = 0;
+					if(opt3S.equals("Q")) {
+						fin3 = true;
+					}
+					else {
+						opt3 = Integer.parseInt(opt3S);
+					}
 					switch(opt3) {
 					case 1:
 						System.out.println("Escriba el nuevo nombre de la clse: ");
@@ -76,7 +91,14 @@ public class Ui {
 						boolean fin34 = false;
 						while(!fin34) {
 							printMenuNota(n34);
-							int opt34  = sc.nextInt();
+							String opt34S = sc.next();
+							int opt34  = 0;
+							if(opt34S.equals("Q")) {
+								fin34 = true;
+							}
+							else {
+								opt34 = Integer.parseInt(opt34S);
+							}
 							switch(opt34) {
 							case 1:
 								System.out.println("Escriba el nuevo nombre de la nota: ");
@@ -96,9 +118,6 @@ public class Ui {
 							case 4:
 								n34.setObtenida(!n34.isObtenida());
 								break;
-							case 5:
-								fin34 = true;
-								break;
 							}
 						}
 						break;
@@ -117,9 +136,6 @@ public class Ui {
 						printMenuNotas(notasNes);
 						calc.reload();
 						break;
-					case 8:
-						fin3 = true;
-						break;
 					}
 				}
 				break;
@@ -130,12 +146,6 @@ public class Ui {
 				break;
 			case 5:
 				calc.save();
-				break;
-			case 6:
-				calc.load();
-				break;
-			case 7:
-				fin = true;
 				break;
 			}
      	}
@@ -150,8 +160,7 @@ public class Ui {
 		System.out.println("3. Seleccionar Clase");
 		System.out.println("4. Mostrar Clases");
 		System.out.println("5. Guardar");
-		System.out.println("6. Cargar");
-		System.out.println("7. Salir");
+		System.out.println("Q. Salir");
 	}
 
 	private static void printMenuClases(ArrayList<Clase> cs)
@@ -175,7 +184,7 @@ public class Ui {
 		System.out.println("5. Mostrar Notas");
 		System.out.println("6. Guardar");
 		System.out.println("7. Calcular Cuanto necesito");
-		System.out.println("8. Salir");
+		System.out.println("Q. Salir");
 	}
 	
 	private static void printMenuNotas(ArrayList<Nota> ns) {
@@ -196,7 +205,7 @@ public class Ui {
 		System.out.println("2. Cambiar porcentage");
 		System.out.println("3. Cambiar puntos");
 		System.out.println("4. Cambiar obtenida");
-		System.out.println("5. Salir");
+		System.out.println("Q. Salir");
 	}
 
 }
