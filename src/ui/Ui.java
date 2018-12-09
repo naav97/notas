@@ -134,7 +134,7 @@ public class Ui {
 						double def = sc.nextDouble();
 						ArrayList<Nota> notasNes = c3.notasQueTocaSacar(def);
 						printMenuNotas(notasNes);
-						calc.reload();
+						//calc.reload();
 						break;
 					}
 				}
@@ -176,7 +176,7 @@ public class Ui {
 	private static void printMenuClase(Clase c) {
 		System.out.println("-----------------------NAAV97-------------------------");
 		System.out.println("-----------------Calculador de notas------------------");
-		System.out.println(c.getNombre());
+		System.out.println(c.getNombre() + " " + c.getDefinitiva());
 		System.out.println("1. Cambiar nombre");
 		System.out.println("2. Agregar Nota");
 		System.out.println("3. Eliminar Nota");
