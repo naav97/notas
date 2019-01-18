@@ -74,7 +74,7 @@ public class Ui {
 						String nombreNota = sc.next();
 						System.out.println("Escriba el porcentage de la nota: ");
 						double porc = sc.nextDouble();
-						Nota n32 = new Nota(nombreNota, porc);
+						Nota n32 = new Nota(nombreNota, porc, c3.getNombre());
 						c3.addNota(n32);
 						break;
 					case 3:

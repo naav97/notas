@@ -51,6 +51,7 @@ public class Calculator {
 				nota.put("porcentage", n.getPorcentage());
 				nota.put("puntos", n.getPuntos());
 				nota.put("obtenida", n.isObtenida());
+				nota.put("nombreClase", n.getNombreClase());
 				notas.put(nota);
 			}
 			clase.put("notas", notas);
@@ -91,7 +92,7 @@ public class Calculator {
 			ArrayList<Nota> nostasRe = new ArrayList<>();
 			JSONArray notasj = clasesj.getJSONObject(i).getJSONArray("notas");
 			for(int j = 0; j < notasj.length(); j++) {
-				Nota n = new Nota(notasj.getJSONObject(j).getString("nombre"), notasj.getJSONObject(j).getDouble("porcentage"), notasj.getJSONObject(j).getDouble("puntos"), notasj.getJSONObject(j).getBoolean("obtenida"));
+				Nota n = new Nota(notasj.getJSONObject(j).getString("nombre"), notasj.getJSONObject(j).getDouble("porcentage"), notasj.getJSONObject(j).getDouble("puntos"), notasj.getJSONObject(j).getBoolean("obtenida"), notasj.getJSONObject(j).getString("nnombreClase"));
 				nostasRe.add(n);
 			}
 			c.setNotas(nostasRe);

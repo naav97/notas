@@ -5,3 +5,5 @@ CREATE TABLE Notas(
   Obtenida TEXT NOT NULL,
   Clase TEXT NOT NULL
 );
+
+CREATE TABLE Clases(Nombre TEXT NOT NULL PRIMARI KEY);

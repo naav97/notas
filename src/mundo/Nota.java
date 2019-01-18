@@ -6,19 +6,22 @@ public class Nota {
 	private double porcentage;
 	private double puntos;
 	private boolean obtenida;
+	private String nombreClase;
 	
-	public Nota(String pNombre, double pPorcentage) {
+	public Nota(String pNombre, double pPorcentage, String pNombreClase) {
 		this.nombre = pNombre;
 		this.porcentage = pPorcentage;
 		this.puntos = 0;
 		this.obtenida = false;
+		this.nombreClase = pNombreClase;
 	}
 	
-	public Nota(String pNombre, double pPorcentage, double pPuntos, boolean pObtenida) {
+	public Nota(String pNombre, double pPorcentage, double pPuntos, boolean pObtenida, String pNombreClase) {
 		this.nombre = pNombre;
 		this.porcentage = pPorcentage;
 		this.puntos = pPuntos;
 		this.obtenida = pObtenida;
+		this.nombreClase = pNombreClase;
 	}
 
 	public String getNombre() {
@@ -55,6 +58,10 @@ public class Nota {
 
 	public double getNota() {
 		return porcentage * puntos;
+	}
+	
+	public String getNombreClase() {
+		return this.nombreClase;
 	}
 
 }
