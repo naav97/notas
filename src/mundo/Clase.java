@@ -76,7 +76,14 @@ public class Clase {
 	public ArrayList<Nota> notasQueTocaSacar(double num){
 		ArrayList<Nota> re = new ArrayList<>();
 		for(Nota n : notas) {
-			re.add(new Nota(n.getNombre(),n.getPorcentage(),n.getPuntos(),n.isObtenida(),n.getNombreClase()));
+			String ob;
+			if(n.isObtenida()) {
+				ob = "Y";
+			}
+			else {
+				ob = "N";
+			}
+			re.add(new Nota(n.getNombre(),n.getPorcentage(),n.getPuntos(),ob,n.getNombreClase()));
 		}
 		boolean ya = false;
 		boolean Noobtenidas = checkNoObtenidaExiste(re);

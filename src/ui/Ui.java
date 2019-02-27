@@ -14,7 +14,7 @@ public class Ui {
 		calc = new Calculator();
 		Scanner sc = new Scanner(System.in);
 		boolean fin=false;
-		calc.load();
+		calc.loadP();
 		while(!fin)
 		{
 			printMenuPrincipal();

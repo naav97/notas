@@ -16,11 +16,16 @@ public class Nota {
 		this.nombreClase = pNombreClase;
 	}
 	
-	public Nota(String pNombre, double pPorcentage, double pPuntos, boolean pObtenida, String pNombreClase) {
+	public Nota(String pNombre, double pPorcentage, double pPuntos, String pObtenida, String pNombreClase) {
 		this.nombre = pNombre;
 		this.porcentage = pPorcentage;
 		this.puntos = pPuntos;
-		this.obtenida = pObtenida;
+		if(pObtenida == "Y") {
+			this.obtenida = true;
+		}
+		else {
+			this.obtenida = false;
+		}
 		this.nombreClase = pNombreClase;
 	}
 

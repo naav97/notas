@@ -10,12 +10,21 @@ import java.util.List;
 
 import org.json.*;
 
+import Persist.ClasePersist;
+import Persist.NotaPersist;
+
 public class Calculator {
 	
 	private ArrayList<Clase> clases;
+	private ArrayList<Nota> notas;
+	private ClasePersist cp;
+	private NotaPersist np;
 	
 	public Calculator() {
 		this.clases = new ArrayList<>();
+		this.notas = new ArrayList<>();
+		this.cp = new ClasePersist();
+		this.np = new NotaPersist();
 	}
 
 	public ArrayList<Clase> getClases() {
@@ -26,8 +35,9 @@ public class Calculator {
 		this.clases = clases;
 	}
 	
-	public void addClase(Clase c) {
+	public void addClase(Clase c) throws Exception {
 		clases.add(c);
+		cp.agregarClase(c.getNombre());
 	}
 	
 	public void removeClase(Clase c) {
@@ -36,6 +46,22 @@ public class Calculator {
 	
 	public void removeClase(int i) {
 		clases.remove(i);
+	}
+	
+	public void addNota(Nota n) throws Exception {
+		Clase c = getClaseNombre(n.getNombreClase());
+		c.addNota(n);
+		np.agregarNota(n);
+	}
+	
+	public Clase getClaseNombre(String nombre) {
+		Clase c = null;
+		for(Clase cf : clases) {
+			if(cf.getNombre() == nombre) {
+				c = cf;
+			}
+		}
+		return c;
 	}
 	
 	public void save() throws Exception {
@@ -70,40 +96,9 @@ public class Calculator {
 		}
 	}
 	
-	private String leerJson() throws Exception {
-		StringBuffer fileData = new StringBuffer();
-		BufferedReader reader = new BufferedReader(new FileReader("Data.json"));
-		char[] buf = new char[1024];
-        int numRead=0;
-        while((numRead=reader.read(buf)) != -1){
-            String readData = String.valueOf(buf, 0, numRead);
-            fileData.append(readData);
-        }
-        reader.close();
-        return fileData.toString();
-	}
-	
-	public void load() throws Exception {
-		String data = leerJson();
-		JSONObject obj = new JSONObject(data);
-		JSONArray clasesj = (JSONArray) obj.get("clases");
-		for(int i = 0; i < clasesj.length(); i++) {
-			Clase c = new Clase(clasesj.getJSONObject(i).getString("nombre"));
-			ArrayList<Nota> nostasRe = new ArrayList<>();
-			JSONArray notasj = clasesj.getJSONObject(i).getJSONArray("notas");
-			for(int j = 0; j < notasj.length(); j++) {
-				Nota n = new Nota(notasj.getJSONObject(j).getString("nombre"), notasj.getJSONObject(j).getDouble("porcentage"), notasj.getJSONObject(j).getDouble("puntos"), notasj.getJSONObject(j).getBoolean("obtenida"), notasj.getJSONObject(j).getString("nnombreClase"));
-				nostasRe.add(n);
-			}
-			c.setNotas(nostasRe);
-			this.clases.add(c);
-		}
-	}
-	
-	public void reload() throws Exception {
-		clases = null;
-		clases = new ArrayList<>();
-		load();
+	public void loadP() throws Exception {
+		this.clases = cp.darClases();
+		this.notas = np.darNotas();
 	}
 
 }
