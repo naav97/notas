@@ -5,12 +5,27 @@ import java.util.Collections;
 
 public class Clase {
 	
+	private int id;
 	private String nombre;
 	private ArrayList<Nota> notas;
 	
 	public Clase(String pNombre) {
 		this.nombre = pNombre;
 		this.notas = new ArrayList<>();
+	}
+	
+	public Clase(int pid, String pNombre) {
+		this.id = pid;
+		this.nombre = pNombre;
+		this.notas = new ArrayList<>();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
