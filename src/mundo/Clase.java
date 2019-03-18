@@ -3,9 +3,11 @@ package mundo;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import Persist.ClasePersist;
+import Persist.NotaPersist;
+
 public class Clase {
 	
-	private int id;
 	private String nombre;
 	private ArrayList<Nota> notas;
 	
@@ -14,18 +16,9 @@ public class Clase {
 		this.notas = new ArrayList<>();
 	}
 	
-	public Clase(int pid, String pNombre) {
-		this.id = pid;
-		this.nombre = pNombre;
-		this.notas = new ArrayList<>();
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public Clase(String nombre, ArrayList<Nota> notas) {
+		this.nombre = nombre;
+		this.notas = notas;
 	}
 
 	public String getNombre() {
@@ -38,10 +31,6 @@ public class Clase {
 
 	public ArrayList<Nota> getNotas() {
 		return notas;
-	}
-
-	public void setNotas(ArrayList<Nota> notas) {
-		this.notas = notas;
 	}
 	
 	public void addNota(Nota n) {
