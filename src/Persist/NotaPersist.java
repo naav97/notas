@@ -64,7 +64,7 @@ public class NotaPersist {
 		else {
 			ps.setString(4, "N");
 		}
-		ps.setString(5, n.getNombreClase());
+		ps.setInt(5, n.getIDClase());
 		ps.executeUpdate();
 	}
 	
@@ -75,33 +75,33 @@ public class NotaPersist {
 		ResultSet rs    = stmt.executeQuery(sql);
 		ArrayList<Nota> re = new ArrayList<>();
 		while(rs.next()) {
-			Nota n = new Nota(rs.getString("Nombre"), rs.getDouble("Porcentage"), rs.getDouble("Puntos"), rs.getString("Obtenida"), rs.getString("Clase"));
+			Nota n = new Nota(rs.getInt("id"), rs.getString("Nombre"), rs.getDouble("Porcentage"), rs.getDouble("Puntos"), rs.getString("Obtenida"), rs.getInt("Clase"));
 			re.add(n);
 		}
 		return re;
 	}
 	
-	public ArrayList<Nota> darNotasClase(String clase) throws Exception {
+	public ArrayList<Nota> darNotasClase(int clase) throws Exception {
 		String sql = "SELECT * FROM Notal WHERE Clase = ?";
 		Connection c = conect();
 		PreparedStatement pstmt = c.prepareStatement(sql);
-		pstmt.setString(1, clase);
+		pstmt.setInt(1, clase);
 		ResultSet rs = pstmt.executeQuery();
 		ArrayList<Nota> re = new ArrayList<>();
 		while(rs.next()) {
-			Nota n = new Nota(rs.getString("Nombre"), rs.getDouble("Porcentage"), rs.getDouble("Puntos"), rs.getString("Obtenida"), rs.getString("Clase"));
+			Nota n = new Nota(rs.getInt("id"), rs.getString("Nombre"), rs.getDouble("Porcentage"), rs.getDouble("Puntos"), rs.getString("Obtenida"), rs.getInt("Clase"));
 			re.add(n);
 		}
 		return re;
 	}
 	
-	public Nota darNota(String pNota) throws Exception {
-		String sql = "SELECT * FROM Notas WHERE Nombre = ?";
+	public Nota darNota(int id) throws Exception {
+		String sql = "SELECT * FROM Notas WHERE id = ?";
 		Connection c = conect();
 		PreparedStatement pstmt  = c.prepareStatement(sql);
-		pstmt.setString(1, pNota);
+		pstmt.setInt(1, id);
 		ResultSet rs  = pstmt.executeQuery();
-		Nota n = new Nota(rs.getString("Nombre"), rs.getDouble("Porcentage"), rs.getDouble("Puntos"), rs.getString("Obtenida"), rs.getString("Clase"));
+		Nota n = new Nota(rs.getInt("id"), rs.getString("Nombre"), rs.getDouble("Porcentage"), rs.getDouble("Puntos"), rs.getString("Obtenida"), rs.getInt("Clase"));
 		return n;
 	}
 	

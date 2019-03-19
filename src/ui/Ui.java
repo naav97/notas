@@ -3,18 +3,24 @@ package ui;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import logic.ClaseLogic;
+import logic.NotaLogic;
 import mundo.*;
 
 public class Ui {
 	
-	private static Calculator calc;
+	private static ClaseLogic cl;
+	private static NotaLogic nl;
+	private static ArrayList<Clase> clases;
+	private static ArrayList<Nota> notas;
 	
 	public static void main(String[] args) throws Exception 
 	{
-		calc = new Calculator();
+		cl = new ClaseLogic();
+		nl = new NotaLogic();
+		load();
 		Scanner sc = new Scanner(System.in);
 		boolean fin=false;
-		calc.loadP();
 		while(!fin)
 		{
 			printMenuPrincipal();
@@ -34,24 +40,23 @@ public class Ui {
 			case 1:
 				System.out.println("Escriba el nombre de la clse: ");
 				String nombre = sc.next();
-				Clase c1 = new Clase(nombre);
-				calc.addClase(c1);
+				cl.createClase(nombre);
 				break;
 			case 2:
 				System.out.println("Escoja una clase: ");
-				printMenuClases(calc.getClases());
+				printMenuClases(cl.darClases());
 				int i = sc.nextInt();
-				calc.removeClase(i);
+				cl.deleteClase(i);
 				break;
 			case 3:
-				if(calc.getClases().size() == 0) {
+				if(cl.darClases().size() == 0) {
 					System.out.println("No hay clases");
 					break;
 				}
 				System.out.println("Escoja una clase: ");
-				printMenuClases(calc.getClases());
+				printMenuClases(cl.darClases());
 				int clas = sc.nextInt();
-				Clase c3 = calc.getClases().get(clas);
+				Clase c3 = cl.darClase(clas);
 				boolean fin3 = false;
 				while(!fin3) {
 					printMenuClase(c3);
@@ -74,8 +79,7 @@ public class Ui {
 						String nombreNota = sc.next();
 						System.out.println("Escriba el porcentage de la nota: ");
 						double porc = sc.nextDouble();
-						Nota n32 = new Nota(nombreNota, porc, c3.getNombre());
-						c3.addNota(n32);
+						nl.createNota(nombreNota, porc, c3.getId());
 						break;
 					case 3:
 						System.out.println("Escoja una nota: ");
@@ -127,9 +131,6 @@ public class Ui {
 						System.in.read();
 						break;
 					case 6:
-						calc.save();
-						break;
-					case 7:
 						System.out.println("Escriba cuanto quiere sacar en la nota final: ");
 						double def = sc.nextDouble();
 						ArrayList<Nota> notasNes = c3.notasQueTocaSacar(def);
@@ -140,15 +141,20 @@ public class Ui {
 				}
 				break;
 			case 4:
-				printMenuClases(calc.getClases());
+				printMenuClases(cl.darClases());
 				System.out.println("Oprinma Enter para continuar");
 				System.in.read();
 				break;
-			case 5:
-				calc.save();
-				break;
 			}
      	}
+	}
+	
+	private static void load() throws Exception {
+		clases = cl.darClases();
+		notas = nl.darNotas();
+		for(Clase c : clases) {
+			c.setNotas(nl.darNotasClase(c.getId()));
+		}
 	}
 	
 	private static void printMenuPrincipal() {
@@ -159,7 +165,6 @@ public class Ui {
 		System.out.println("2. Eliminar Clase");
 		System.out.println("3. Seleccionar Clase");
 		System.out.println("4. Mostrar Clases");
-		System.out.println("5. Guardar");
 		System.out.println("Q. Salir");
 	}
 
@@ -169,7 +174,7 @@ public class Ui {
 		System.out.println("-----------------Calculador de notas------------------");
 		System.out.println("Clases: ");
 		for(int i = 0; i < cs.size(); i++) {
-			System.out.println(i+". "+cs.get(i).getNombre());
+			System.out.println("id: "+cs.get(i).getId()+"| nombre: "+cs.get(i).getNombre());
 		}
 	}
 	
@@ -182,8 +187,7 @@ public class Ui {
 		System.out.println("3. Eliminar Nota");
 		System.out.println("4. Seleccionar Nota");
 		System.out.println("5. Mostrar Notas");
-		System.out.println("6. Guardar");
-		System.out.println("7. Calcular Cuanto necesito");
+		System.out.println("6. Calcular Cuanto necesito");
 		System.out.println("Q. Salir");
 	}
 	

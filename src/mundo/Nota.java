@@ -2,21 +2,23 @@ package mundo;
 
 public class Nota {
 	
+	int id;
 	private String nombre;
 	private double porcentage;
 	private double puntos;
 	private boolean obtenida;
-	private String nombreClase;
+	private int idClase;
 	
-	public Nota(String pNombre, double pPorcentage, String pNombreClase) {
+	public Nota(String pNombre, double pPorcentage, int pIDClase) {
 		this.nombre = pNombre;
 		this.porcentage = pPorcentage;
 		this.puntos = 0;
 		this.obtenida = false;
-		this.nombreClase = pNombreClase;
+		this.idClase = pIDClase;
 	}
 	
-	public Nota(String pNombre, double pPorcentage, double pPuntos, String pObtenida, String pNombreClase) {
+	public Nota(int id, String pNombre, double pPorcentage, double pPuntos, String pObtenida, int pIDClase) {
+		this.id = id;
 		this.nombre = pNombre;
 		this.porcentage = pPorcentage;
 		this.puntos = pPuntos;
@@ -26,7 +28,15 @@ public class Nota {
 		else {
 			this.obtenida = false;
 		}
-		this.nombreClase = pNombreClase;
+		this.idClase = pIDClase;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -65,8 +75,8 @@ public class Nota {
 		return porcentage * puntos;
 	}
 	
-	public String getNombreClase() {
-		return this.nombreClase;
+	public int getIDClase() {
+		return this.idClase;
 	}
 
 }

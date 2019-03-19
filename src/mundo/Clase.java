@@ -8,17 +8,24 @@ import Persist.NotaPersist;
 
 public class Clase {
 	
+	int id;
 	private String nombre;
-	private ArrayList<Nota> notas;
+	ArrayList<Nota> notas;
 	
-	public Clase(String pNombre) {
+	public Clase(int id, String pNombre) {
 		this.nombre = pNombre;
-		this.notas = new ArrayList<>();
+		this.id = id;
+		notas = new ArrayList<>();
 	}
 	
-	public Clase(String nombre, ArrayList<Nota> notas) {
-		this.nombre = nombre;
-		this.notas = notas;
+	public Clase(int id, String pNombre, ArrayList<Nota> nnotas) {
+		this.nombre = pNombre;
+		this.id = id;
+		notas = nnotas;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public String getNombre() {
@@ -33,6 +40,10 @@ public class Clase {
 		return notas;
 	}
 	
+	public void setNotas(ArrayList<Nota> notas) {
+		this.notas = notas;
+	}
+
 	public void addNota(Nota n) {
 		notas.add(n);
 	}
@@ -87,7 +98,7 @@ public class Clase {
 			else {
 				ob = "N";
 			}
-			re.add(new Nota(n.getNombre(),n.getPorcentage(),n.getPuntos(),ob,n.getNombreClase()));
+			re.add(new Nota(n.getId(),n.getNombre(),n.getPorcentage(),n.getPuntos(),ob,n.getIDClase()));
 		}
 		boolean ya = false;
 		boolean Noobtenidas = checkNoObtenidaExiste(re);

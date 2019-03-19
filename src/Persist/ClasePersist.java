@@ -71,19 +71,19 @@ public class ClasePersist {
 		ResultSet rs    = stmt.executeQuery(sql);
 		ArrayList<Clase> re = new ArrayList<>();
 		while(rs.next()) {
-			Clase r = new Clase(rs.getString("Nombre"));
+			Clase r = new Clase(rs.getInt("id"), rs.getString("Nombre"));
 			re.add(r);
 		}
 		return re;
 	}
 	
-	public Clase darClase(String pClase) throws Exception {
-		String sql = "SELECT * FROM Clases WHERE Nombre = ?";
+	public Clase darClase(int pClase) throws Exception {
+		String sql = "SELECT * FROM Clases WHERE id = ?";
 		Connection c = conect();
 		PreparedStatement pstmt  = c.prepareStatement(sql);
-		pstmt.setString(1, pClase);
+		pstmt.setInt(1, pClase);
 		ResultSet rs  = pstmt.executeQuery();
-		Clase re = new Clase(rs.getString("Nombre"));
+		Clase re = new Clase(rs.getInt("id"), rs.getString("Nombre"));
 		return re;
 	}
 	
@@ -96,11 +96,11 @@ public class ClasePersist {
 		pstmt.executeUpdate();
 	}
 	
-	public void deleteClase(String nombre) throws Exception {
-		String sql = "DELETE FROM Clases WHERE Nombre = ?";
+	public void deleteClase(int nombre) throws Exception {
+		String sql = "DELETE FROM Clases WHERE id = ?";
 		Connection c = conect();
 		PreparedStatement pstmt = c.prepareStatement(sql);
-		pstmt.setString(1, nombre);
+		pstmt.setInt(1, nombre);
 		pstmt.executeUpdate();
 	}
 

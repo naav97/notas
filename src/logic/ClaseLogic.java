@@ -24,6 +24,10 @@ public class ClaseLogic {
 		return cp.darClases();
 	}
 	
+	public Clase darClase(int id) throws Exception {
+		return cp.darClase(id);
+	}
+	
 	public void updateClase(String nombre, String pNombre) throws Exception {
 		if(nombre == null || nombre == "" || nombre == " ") {
 			throw new Exception("El nombre no puede ser nullo");
@@ -31,7 +35,7 @@ public class ClaseLogic {
 		cp.updateClase(nombre, pNombre);
 	}
 	
-	public void deleteClase(String clase) throws Exception {
+	public void deleteClase(int clase) throws Exception {
 		if(cp.darClase(clase) == null) {
 			throw new Exception("La clase no existe");
 		}

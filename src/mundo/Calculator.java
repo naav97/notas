@@ -49,15 +49,15 @@ public class Calculator {
 	}
 	
 	public void addNota(Nota n) throws Exception {
-		Clase c = getClaseNombre(n.getNombreClase());
+		Clase c = getClaseNombre(n.getIDClase());
 		c.addNota(n);
 		np.agregarNota(n);
 	}
 	
-	public Clase getClaseNombre(String nombre) {
+	public Clase getClaseNombre(int nombre) {
 		Clase c = null;
 		for(Clase cf : clases) {
-			if(cf.getNombre() == nombre) {
+			if(cf.getId() == nombre) {
 				c = cf;
 			}
 		}
@@ -77,7 +77,7 @@ public class Calculator {
 				nota.put("porcentage", n.getPorcentage());
 				nota.put("puntos", n.getPuntos());
 				nota.put("obtenida", n.isObtenida());
-				nota.put("nombreClase", n.getNombreClase());
+				nota.put("nombreClase", n.getIDClase());
 				notas.put(nota);
 			}
 			clase.put("notas", notas);
