@@ -62,6 +62,7 @@ public class ClasePersist {
 		PreparedStatement ps = c.prepareStatement(sql);
 		ps.setString(1, pClase);
 		ps.executeUpdate();
+		c.close();
 	}
 	
 	public ArrayList<Clase> darClases() throws Exception{
@@ -74,6 +75,7 @@ public class ClasePersist {
 			Clase r = new Clase(rs.getInt("id"), rs.getString("Nombre"));
 			re.add(r);
 		}
+		c.close();
 		return re;
 	}
 	
@@ -84,16 +86,18 @@ public class ClasePersist {
 		pstmt.setInt(1, pClase);
 		ResultSet rs  = pstmt.executeQuery();
 		Clase re = new Clase(rs.getInt("id"), rs.getString("Nombre"));
+		c.close();
 		return re;
 	}
 	
-	public void updateClase(String nombre, String pNombre) throws Exception {
-		String sql = "UPDATE Clases SET Nombre = ? WHERE Nombre = ?";
+	public void updateClase(int id, String pNombre) throws Exception {
+		String sql = "UPDATE Clases SET Nombre = ? WHERE id = ?";
 		Connection c = conect();
 		PreparedStatement pstmt = c.prepareStatement(sql);
 		pstmt.setString(1, pNombre);
-		pstmt.setString(2, nombre);
+		pstmt.setInt(2, id);
 		pstmt.executeUpdate();
+		c.close();
 	}
 	
 	public void deleteClase(int nombre) throws Exception {
@@ -102,6 +106,7 @@ public class ClasePersist {
 		PreparedStatement pstmt = c.prepareStatement(sql);
 		pstmt.setInt(1, nombre);
 		pstmt.executeUpdate();
+		c.close();
 	}
 
 }

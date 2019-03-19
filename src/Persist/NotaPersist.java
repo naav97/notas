@@ -66,6 +66,7 @@ public class NotaPersist {
 		}
 		ps.setInt(5, n.getIDClase());
 		ps.executeUpdate();
+		c.close();
 	}
 	
 	public ArrayList<Nota> darNotas() throws Exception {
@@ -78,11 +79,12 @@ public class NotaPersist {
 			Nota n = new Nota(rs.getInt("id"), rs.getString("Nombre"), rs.getDouble("Porcentage"), rs.getDouble("Puntos"), rs.getString("Obtenida"), rs.getInt("Clase"));
 			re.add(n);
 		}
+		c.close();
 		return re;
 	}
 	
 	public ArrayList<Nota> darNotasClase(int clase) throws Exception {
-		String sql = "SELECT * FROM Notal WHERE Clase = ?";
+		String sql = "SELECT * FROM Notas WHERE Clase = ?";
 		Connection c = conect();
 		PreparedStatement pstmt = c.prepareStatement(sql);
 		pstmt.setInt(1, clase);
@@ -92,6 +94,7 @@ public class NotaPersist {
 			Nota n = new Nota(rs.getInt("id"), rs.getString("Nombre"), rs.getDouble("Porcentage"), rs.getDouble("Puntos"), rs.getString("Obtenida"), rs.getInt("Clase"));
 			re.add(n);
 		}
+		c.close();
 		return re;
 	}
 	
@@ -102,6 +105,7 @@ public class NotaPersist {
 		pstmt.setInt(1, id);
 		ResultSet rs  = pstmt.executeQuery();
 		Nota n = new Nota(rs.getInt("id"), rs.getString("Nombre"), rs.getDouble("Porcentage"), rs.getDouble("Puntos"), rs.getString("Obtenida"), rs.getInt("Clase"));
+		c.close();
 		return n;
 	}
 	
@@ -112,6 +116,7 @@ public class NotaPersist {
 		pstmt.setString(1, nombre);
 		pstmt.setInt(2, id);
 		pstmt.executeUpdate();
+		c.close();
 	}
 	
 	public void updatePorcentage(int id, double porcentage) throws Exception {
@@ -121,6 +126,7 @@ public class NotaPersist {
 		pstmt.setDouble(1, porcentage);
 		pstmt.setInt(2, id);
 		pstmt.executeUpdate();
+		c.close();
 	}
 	
 	public void updatePuntos(int id, double puntos) throws Exception {
@@ -130,6 +136,7 @@ public class NotaPersist {
 		pstmt.setDouble(1, puntos);
 		pstmt.setInt(2, id);
 		pstmt.executeUpdate();
+		c.close();
 	}
 	
 	public void updateObtenida(int id, String obtenida) throws Exception {
@@ -139,15 +146,17 @@ public class NotaPersist {
 		pstmt.setString(1, obtenida);
 		pstmt.setInt(2, id);
 		pstmt.executeUpdate();
+		c.close();
 	}
 	
-	public void updateClase(int id, String clase) throws Exception {
+	public void updateClase(int id, int clase) throws Exception {
 		String sql = "UPDATE Notas SET Clase = ? WHERE id = ?";
 		Connection c = conect();
 		PreparedStatement pstmt = c.prepareStatement(sql);
-		pstmt.setString(1, clase);
+		pstmt.setInt(1, clase);
 		pstmt.setInt(2, id);
 		pstmt.executeUpdate();
+		c.close();
 	}
 	
 	public void deleteNota(int id) throws Exception {
@@ -156,5 +165,6 @@ public class NotaPersist {
 		PreparedStatement pstmt = c.prepareStatement(sql);
 		pstmt.setInt(1, id);
 		pstmt.executeUpdate();
+		c.close();
 	}
 }

@@ -28,11 +28,11 @@ public class ClaseLogic {
 		return cp.darClase(id);
 	}
 	
-	public void updateClase(String nombre, String pNombre) throws Exception {
-		if(nombre == null || nombre == "" || nombre == " ") {
+	public void updateClase(int id, String pNombre) throws Exception {
+		if(pNombre == null || pNombre == "" || pNombre == " ") {
 			throw new Exception("El nombre no puede ser nullo");
 		}
-		cp.updateClase(nombre, pNombre);
+		cp.updateClase(id, pNombre);
 	}
 	
 	public void deleteClase(int clase) throws Exception {
