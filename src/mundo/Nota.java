@@ -22,7 +22,7 @@ public class Nota {
 		this.nombre = pNombre;
 		this.porcentage = pPorcentage;
 		this.puntos = pPuntos;
-		if(pObtenida == "Y") {
+		if(pObtenida.equals("Y")) {
 			this.obtenida = true;
 		}
 		else {
